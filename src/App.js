@@ -7,6 +7,14 @@ import NotFound from "./components/NotFound";
 import ContactAdmin from "./components/ContactAdmin.jsx";
 import ContactUser from "./components/ContactUser.jsx";
 import ContactIndex from "./components/ContactIndex.jsx";
+import DemoNavigate from "./components/DemoNavigate";
+import Course from "./components/DynamicRoute/Course";
+import CourseDetails from "./components/DynamicRoute/CourseDetails";
+import CourseDetailByType from "./components/DynamicRoute/CourseDetailByType";
+import PrivateRoute from "./components/ProtectRoute/PrivateRoute";
+import Account from "./components/ProtectRoute/Account";
+import Person from "./components/ProtectRoute/Person";
+import Login from "./components/ProtectRoute/Login";
 function App() {
   // Arrow Function
   // const activeColor = ()=>{return }
@@ -78,7 +86,16 @@ function App() {
             </li>
           </ul>
         </li>
+        <li>
+          <NavLink to='/course' style={activeColor}>
+            Course
+          </NavLink>
+        </li>
       </ul>
+
+      {/* Demo Navigate */}
+      <DemoNavigate />
+
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
         <Route path='/about' element={<About />}></Route>
@@ -97,7 +114,23 @@ function App() {
             element={<ContactAdmin></ContactAdmin>}
           ></Route>
         </Route>
-
+        {/* Demo Dynamic Route */}
+        <Route path='/course' element={<Course></Course>}></Route>
+        <Route
+          path='/course/:id'
+          element={<CourseDetails></CourseDetails>}
+        ></Route>
+        <Route
+          path='/course/:id/:type'
+          element={<CourseDetailByType></CourseDetailByType>}
+        ></Route>
+        {/* Demo Protect Route */}
+        <Route element={<PrivateRoute></PrivateRoute>}>
+          <Route path='/person' element={<Person></Person>}></Route>
+          <Route path='/account' element={<Account></Account>}></Route>
+        </Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        {/* Not Found Page */}
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </div>
